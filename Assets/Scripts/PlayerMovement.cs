@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 m_currentDirection;
     private Vector2 m_nextDirection;
     private Vector2 m_nextPosition;
+
+    public GameManager m_gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,20 @@ public class PlayerMovement : MonoBehaviour
 
         Collider2D hitCollider = Physics2D.OverlapCircle(m_rb.position + direction * offset, 0.2f, LayerMask.GetMask("Walls"));
         return (hitCollider == null);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "ScorePellet")
+        {
+            Destroy(collision.gameObject);
+            m_gameManager.AddScore(100);
+        }
+
+        if (collision.gameObject.tag == "TPZone")
+        {
+            transform.position = Vector3.Scale(transform.position, new Vector3(-1f, 1f, 1f));
+        }
     }
 
 }
