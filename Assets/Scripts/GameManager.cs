@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GhostState[] ghosts;
     public PlayerMovement m_Pacman;
 
+    public GameObject m_scorePelletsTileMap;
+
     public int m_ghostScaredDuration = 7;
     public int m_ghostDeadDuration = 4;
 
@@ -80,9 +82,24 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(2);
+            EndGame();
         }
+    }
 
+    public void EndGame()
+    {
+        SceneManager.LoadScene(2);
+    }
 
+    public void CheckIfRemainingScorePellets()
+    {
+        if (m_scorePelletsTileMap.transform.childCount == 1)
+        {
+            EndGame();
+        }
+        else
+        {
+            Debug.Log(m_scorePelletsTileMap.transform.childCount);
+        }
     }
 }

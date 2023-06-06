@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(collision.gameObject);
             m_gameManager.AddScore(100);
+            m_gameManager.CheckIfRemainingScorePellets();
         }
 
         if (collision.gameObject.tag == "PowerPellet")
