@@ -86,6 +86,13 @@ public class PlayerMovement : MonoBehaviour
             m_gameManager.AddScore(100);
         }
 
+        if (collision.gameObject.tag == "PowerPellet")
+        {
+            Destroy(collision.gameObject);
+            m_gameManager.PowerPelletEaten();
+            //make ghost mangeable
+        }
+
         if (collision.gameObject.tag == "TPZone")
         {
             transform.position = Vector3.Scale(transform.position, new Vector3(-1f, 1f, 1f));

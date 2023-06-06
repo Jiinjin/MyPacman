@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - ScorePellet
   - TPZone
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -15,12 +16,12 @@ TagManager:
   - Water
   - UI
   - Walls
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ScorePellets
+  - PowerPellets
+  - PathNodes
+  - Door
+  - Pacman
+  - Ghost
   - 
   - 
   - 

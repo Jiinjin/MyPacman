@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
 
     private int m_score;
 
+    public GhostState[] ghosts;
+
+    public int m_ghostScaredDuration = 7;
+    public int m_ghostDeadDuration = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +39,22 @@ public class GameManager : MonoBehaviour
     public void SetScore(int newScore)
     {
         m_score = newScore;
+    }
+
+    public void PowerPelletEaten()
+    {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
+            ghosts[i].SetGhostState(GhostState.GhostStates.Scared, m_ghostScaredDuration);
+        }
+    }
+
+    public void GhostDied(GhostState ghost)
+    {
+        //score
+
+        ghost.TransitionDeadGhost(m_ghostDeadDuration);
+
+
     }
 }
