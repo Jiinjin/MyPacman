@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
+    //Check if we can move in the current direction or the next one
     private void TryMove()
     {
         if (CanMoveInDirection(m_nextDirection))
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Reset Pacman 
     public void ResetPacman()
     {
         m_currentDirection = Vector2.zero;
@@ -52,12 +54,14 @@ public class PlayerMovement : MonoBehaviour
         transform.position = m_initialPosition;
     }
 
+    //Change the direction of Pacman
     private void MoveInDirection(Vector2 direction)
     {
         m_currentDirection = direction;
         m_nextPosition = m_rb.position + m_currentDirection;
     }
 
+    //Get Input in order to apply Pacman's next direction 
     private void GetNextDirection()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -74,12 +78,14 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    //Pacman main movement
     private void Move()
     {
         Vector2 targetPosition = m_rb.position + m_currentDirection * m_speed * Time.fixedDeltaTime;
         m_rb.MovePosition(targetPosition);
     }
 
+    //Check if Pacman can move in the given direction
     private bool CanMoveInDirection(Vector2 direction)
     {
         float offset = 0.2f; // Adjust this value as needed
@@ -90,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //When Pacman collides with a score pellet, destroy the pellet, add score and check if it was the last one in  order to end the game
         if (collision.gameObject.tag == "ScorePellet")
         {
             Destroy(collision.gameObject);
@@ -97,13 +104,15 @@ public class PlayerMovement : MonoBehaviour
             m_gameManager.CheckIfRemainingScorePellets();
         }
 
+        //When Pacman collides with a power pellet, destroy the pellet and call the according function for the game manager
         if (collision.gameObject.tag == "PowerPellet")
         {
             Destroy(collision.gameObject);
             m_gameManager.PowerPelletEaten();
-            //make ghost mangeable
+            
         }
 
+        //When Pacman collides with the TPZone, Teleports PAcman to the other side of the map
         if (collision.gameObject.tag == "TPZone")
         {
             transform.position = Vector3.Scale(transform.position, new Vector3(-1f, 1f, 1f));

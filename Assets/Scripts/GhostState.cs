@@ -24,6 +24,7 @@ public class GhostState : MonoBehaviour
         
     }
 
+    //Reset ghost
     public void ResetGhost()
     {
         CancelInvoke();
@@ -35,7 +36,7 @@ public class GhostState : MonoBehaviour
         }
 
     }
-
+    //Set the ghost state and call the according function
     public void SetGhostState(GhostStates state, int duration = 0)
     {
         switch(state)
@@ -47,13 +48,14 @@ public class GhostState : MonoBehaviour
                 TransitionPatrolGhost();
                 break;
             case GhostStates.Scared:
+                CancelInvoke("TransitionPatrolGhost");
                 TransitionScaredGhost(duration);
                 break;
 
         }
     }
 
-
+    //Transition to dead ghost, we make the ghost disapear, reset his position and behaviour, and then changing is state back to patrol
     public void TransitionDeadGhost(int duration)
     {
         m_currentState = GhostStates.Dead;
@@ -72,6 +74,7 @@ public class GhostState : MonoBehaviour
 
     }
 
+    //Transition to dead ghost, we make the ghost scared so Pacman can eat it, change color for understanding, and then changing is state back to patrol after a duration
     public void TransitionScaredGhost(int duration)
     {
         m_currentState = GhostStates.Scared;
@@ -80,7 +83,7 @@ public class GhostState : MonoBehaviour
 
         Invoke(nameof(TransitionPatrolGhost), duration);
     }
-
+    //Transition to patrol ghost, checks if ghost is enabled or not, if not then it means the ghost is dead and needs to be reseted back to patrol settings
     public void TransitionPatrolGhost()
     {
         m_currentState = GhostStates.Patrol;
@@ -102,6 +105,7 @@ public class GhostState : MonoBehaviour
         return m_currentState;
     }
 
+    //Ghost collides with player, eats player if not in scared mode, or dies if in scared mode
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")

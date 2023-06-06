@@ -31,6 +31,7 @@ public class GhostMovement : MonoBehaviour
         
     }
 
+    //Reset Ghost
     public void ResetGhostMovement()
     {
         m_currentDirection = Vector2.zero;
@@ -48,6 +49,7 @@ public class GhostMovement : MonoBehaviour
       
     }
 
+    //Check if the ghost can move in the current direction or the next one
     private void TryMove()
     {
         if (CanMoveInDirection(m_nextDirection))
@@ -60,20 +62,23 @@ public class GhostMovement : MonoBehaviour
         }
     }
 
+    //Change the direction of the ghost
     private void MoveInDirection(Vector2 direction)
     {
         m_currentDirection = direction;
         m_nextPosition = m_rb.position + m_currentDirection;
     }
 
+    //Check if the Ghost can move in the given direction
     private bool CanMoveInDirection(Vector2 direction)
     {
-        float offset = 0.2f; // Adjust this value as needed
+        float offset = 0.2f; 
 
         Collider2D hitCollider = Physics2D.OverlapCircle(m_rb.position + direction * offset, 0.2f, obstacleLayer);
         return (hitCollider == null);
     }
 
+    //Ghosts main movement
     private void Move()
     {
 
@@ -81,10 +86,9 @@ public class GhostMovement : MonoBehaviour
         m_rb.MovePosition(targetPosition);  
     }
 
+    //Check if ghost collides with a movement node, giving him the available paths where he can go, and select one randomly and set the according direction
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
-
         NodesMovement node = other.GetComponent<NodesMovement>();
 
         // Do nothing while the ghost is frightened

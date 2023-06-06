@@ -24,11 +24,13 @@ public class UIManager : MonoBehaviour
         
     }
 
+    //Update the score, called when pacman eats a score pellet or eat a ghost in scared mode
     public void UpdateScore(int newScore)
     {
         scoreText.text = "Score: " + newScore;
     }
 
+    //Create the life points of Pacman on the UI
     public void CreateLifePointsUI(int lifePoints)
     {
         for (int i = 0; i < lifePoints; i++)
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //Removes one life on the UI 
     public void RemoveOnePacmanLife()
     {
         if (m_PacmanLifeList.Count != 0)

@@ -25,6 +25,7 @@ public class NodesMovement : MonoBehaviour
         
     }
 
+    //Check if a Raycast hits walls, if not then add the direction as an available direction for ghosts to use
     private void CheckAvailableDirection(Vector2 direction)
     {
         // Cast a ray straight down.

@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         m_score = newScore;
     }
 
+    //Called when Pacman eats a power pellet
     public void PowerPelletEaten()
     {
         for (int i = 0; i < ghosts.Length; i++)
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Called when Pacman ate a ghost in scared mode
     public void GhostDied(GhostState ghost)
     {
         AddScore(300);
@@ -65,9 +67,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Called when ghost eats pacman in normal mode
     public void PacmanDied()
     {
+        //Remove a life point
         m_lifePoints -= 1;
+
+        //Check if any remaining lives, if so, reset ghost and pacman behaviour, else end game
         if (m_lifePoints != 0)
         {
             for (int i = 0; i < ghosts.Length; i++)
@@ -91,15 +97,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    //Called when a score pellet is eaten, checks how many scorepellets left in order to end the game if needed
     public void CheckIfRemainingScorePellets()
     {
         if (m_scorePelletsTileMap.transform.childCount == 1)
         {
             EndGame();
-        }
-        else
-        {
-            Debug.Log(m_scorePelletsTileMap.transform.childCount);
         }
     }
 }
