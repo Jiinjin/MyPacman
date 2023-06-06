@@ -24,6 +24,18 @@ public class GhostState : MonoBehaviour
         
     }
 
+    public void ResetGhost()
+    {
+        CancelInvoke();
+        m_currentState = GhostStates.Patrol;
+        transform.position = m_initialPosition;
+        if (GetComponent<GhostMovement>() != null)
+        {
+            GetComponent<GhostMovement>().ResetGhostMovement();
+        }
+
+    }
+
     public void SetGhostState(GhostStates state, int duration = 0)
     {
         switch(state)
@@ -98,10 +110,10 @@ public class GhostState : MonoBehaviour
             {
                 FindObjectOfType<GameManager>().GhostDied(this);
             }
-            //else
-            //{
-            //    FindObjectOfType<GameManager>().PacmanDied();
-            //}
+            else
+            {
+                FindObjectOfType<GameManager>().PacmanDied();
+            }
         }
     }
 }

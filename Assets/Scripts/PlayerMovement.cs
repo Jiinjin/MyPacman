@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 m_nextPosition;
 
     public GameManager m_gameManager;
+
+    private Vector3 m_initialPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         m_currentDirection = Vector2.zero;
         m_nextDirection = Vector2.zero;
         m_nextPosition = m_rb.position;
+        m_initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -40,6 +43,13 @@ public class PlayerMovement : MonoBehaviour
         {
             MoveInDirection(m_currentDirection);
         }
+    }
+
+    public void ResetPacman()
+    {
+        m_currentDirection = Vector2.zero;
+        m_nextDirection = Vector2.zero;
+        transform.position = m_initialPosition;
     }
 
     private void MoveInDirection(Vector2 direction)
