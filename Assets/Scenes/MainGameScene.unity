@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pacman
       objectReference: {fileID: 0}
+    - target: {fileID: 3487530645730429258, guid: a94cefd966e474b4d883df23e4081f90, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5893024265764150739, guid: a94cefd966e474b4d883df23e4081f90, type: 3}
       propertyPath: m_Radius
       value: 0.47
